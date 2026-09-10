@@ -431,7 +431,7 @@ Licensed under the [MIT License](LICENSE) — free to use, modify, and distribut
 
 <div align="center">
 
-Built by [**codera647**](https://github.com/codera647) as a hands-on portfolio project for a career pivot into F1 / motorsport ML engineering.
+Built by [**codera647**](https://github.com/codera647)
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:15151E,50:E10600,100:15151E&height=100&section=footer" width="100%"/>
 
