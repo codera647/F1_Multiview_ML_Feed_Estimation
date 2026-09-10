@@ -10,6 +10,7 @@
 [![Project Board](https://img.shields.io/badge/roadmap-GitHub%20Project-E10600?style=for-the-badge&logo=github)](https://github.com/users/codera647/projects/4)
 [![Issues](https://img.shields.io/github/issues/codera647/F1_Multiview_ML_Feed_Estimation?style=for-the-badge&color=blueviolet)](https://github.com/codera647/F1_Multiview_ML_Feed_Estimation/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/codera647/F1_Multiview_ML_Feed_Estimation?style=for-the-badge&color=orange)](https://github.com/codera647/F1_Multiview_ML_Feed_Estimation/commits)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 [![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![FastF1](https://img.shields.io/badge/Data-FastF1-e10600?style=flat-square&logo=formula1&logoColor=white)](https://docs.fastf1.dev/)
@@ -378,12 +379,13 @@ Full detail on every open item is tracked as an issue on the [project board](htt
 
 ## License
 
-No license file is currently set on this repository — all rights reserved by default until one is added. (MIT is a common, permissive choice for a portfolio ML project like this one, if you want external use/contributions.)
+Licensed under the [MIT License](LICENSE) — free to use, modify, and distribute, including commercially, with attribution and no warranty.
 
 <br/>
 
 <div align="center">
 
+Built by [**codera647**](https://github.com/codera647) as a hands-on portfolio project for a career pivot into F1 / motorsport ML engineering.
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:15151E,50:E10600,100:15151E&height=100&section=footer" width="100%"/>
 
