@@ -10,6 +10,7 @@ f1_cache/
 # Notebooks (exploratory/scratch work — not part of the reviewable pipeline)
 notebooks/
 *.ipynb_checkpoints/
+Machine_Learning_Estimator.ipynb
 
 # Validation CSVs (generated data-quality reports, reproducible from the
 # stitching scripts — not meant to be tracked as source)
@@ -47,3 +48,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+Claude_outputs/
+
+f1-multiview-ml-project-context.md
+
