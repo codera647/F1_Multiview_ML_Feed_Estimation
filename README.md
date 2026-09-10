@@ -184,6 +184,20 @@ Also fixed in the same pass — a **four-shape parsing rule** for `GapToLeader` 
 
 <div align="center">
 
+| 🏎️ Race events | 📅 Seasons | 🏁 Grands Prix | 🚀 Sprints | ✅ Stitching success | 🕐 Grid resolution |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| **132** | **5** (2021–2025) | **109** | **23** | **132 / 132** (0 failures) | **5 seconds** |
+
+</div>
+
+**Raw footprint:** 5 parquet files per race/session (`laps`, `laps_raw`, `stream`, `car`, `pos`) → **660 raw parquet files** across the full scope (132 × 5).
+
+**Quality pass rate:** 3 of 132 races (2.3%) were flagged by the automated null% check for manual review — all three were individually investigated and confirmed real race events (red flags, pileups, a disrupted session), not pipeline bugs. See [Data quality](#data-quality-what-got-flagged-and-why) below.
+
+**2026** is tracked separately and deliberately excluded from the 132 — held out entirely as a live chronological backtest rather than training data.
+
+<div align="center">
+
 ```mermaid
 pie showData
     title 132 race events in the training scope (2021–2025)
@@ -206,6 +220,35 @@ pie showData
 | **2026** | — | — | **held out entirely** | Used as a live chronological backtest, not for training |
 
 Six 2023 sessions are deliberately excluded rather than backfilled: Round 2 (Saudi Arabian GP) failed upstream at collection time and was diagnosed as not worth chasing further; Rounds 3, 4 (R+S), 5, and 6 loaded cleanly in diagnostics but were never actually saved — rather than backfill them later, the decision was to scale on exactly what's already collected and validated.
+
+<details>
+<summary><strong>Get exact row-level stats for your local dataset</strong></summary>
+
+Total grid rows, unique drivers, and on-disk size all depend on session length — and session length varies a lot in this dataset (red flags and safety cars can stretch a 90-minute race well past its nominal length, or a red-flagged session can end early) — so they're deliberately not hardcoded above. Run this once against your local `data/stitched/` to get real numbers for your copy of the dataset:
+
+```python
+import pandas as pd
+from pathlib import Path
+
+stitched = list(Path("data/stitched").glob("*.parquet"))
+total_rows, all_drivers, total_bytes = 0, set(), 0
+
+for f in stitched:
+    df = pd.read_parquet(f, columns=["Driver"])
+    total_rows += len(df)
+    all_drivers.update(df["Driver"].unique())
+    total_bytes += f.stat().st_size
+
+print(f"Races stitched         : {len(stitched)}")
+print(f"Total grid rows        : {total_rows:,}")
+print(f"Unique drivers seen    : {len(all_drivers)}")
+print(f"Avg rows / race        : {total_rows / len(stitched):,.0f}")
+print(f"On-disk size (stitched): {total_bytes / 1e6:,.1f} MB")
+```
+
+Paste the output back and it can be folded straight into the stats table above.
+
+</details>
 
 <br/>
 
