@@ -184,11 +184,13 @@ Also fixed in the same pass — a **four-shape parsing rule** for `GapToLeader` 
 
 <div align="center">
 
-| 🏎️ Race events | 📅 Seasons | 🏁 Grands Prix | 🚀 Sprints | ✅ Stitching success | 🕐 Grid resolution |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| **132** | **5** (2021–2025) | **109** | **23** | **132 / 132** (0 failures) | **5 seconds** |
+| 🏎️ Race events | 📅 Seasons | 📊 Total grid rows | 🧑‍✈️ Unique drivers | 💾 On-disk size | ✅ Stitching success | 🕐 Grid resolution |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **132** | **5** (2021–2025) | **2,482,479** | **35** | **34.1 MB** | **132 / 132** (0 failures) | **5 seconds** |
 
 </div>
+
+*(Row/driver/size stats computed directly from `data/stitched/` — see [how to reproduce](#get-exact-row-level-stats-for-your-local-dataset) below.)*
 
 **Raw footprint:** 5 parquet files per race/session (`laps`, `laps_raw`, `stream`, `car`, `pos`) → **660 raw parquet files** across the full scope (132 × 5).
 
@@ -210,21 +212,22 @@ pie showData
 
 </div>
 
-| Season | GP | Sprint | In scope | Notes |
-|---|---|---|---|---|
-| 2021 | 22 | 3 | 25 / 25 | Sprints brand new that year — British, Italian, São Paulo |
-| 2022 | 22 | 3 | 25 / 25 | Emilia Romagna, Austrian, São Paulo |
-| 2023 | 17 | 5 | 22 / 28 | 6 sessions excluded (see below) |
-| 2024 | 24 | 6 | 30 / 30 | — |
-| 2025 | 24 | 6 | 30 / 30 | — |
-| **2026** | — | — | **held out entirely** | Used as a live chronological backtest, not for training |
+| Season | GP | Sprint | In scope | Rows | Avg rows/race | Notes |
+|---|---|---|---|---|---|---|
+| 2021 | 22 | 3 | 25 / 25 | 482,746 | 19,310 | Sprints brand new that year — British, Italian, São Paulo. Smallest race in the whole dataset: Belgian GP R at 2,580 rows (the 3-lap red-flag race) |
+| 2022 | 22 | 3 | 25 / 25 | 510,232 | 20,409 | Emilia Romagna, Austrian, São Paulo. Largest race in the dataset: Japanese GP R at 39,560 rows (wet, red-flag-extended) |
+| 2023 | 17 | 5 | 22 / 28 | 400,420 | 18,201 | 6 sessions excluded (see below) |
+| 2024 | 24 | 6 | 30 / 30 | 551,054 | 18,368 | Includes Monaco R at 29,543 rows (the lap-1 pileup + extended red flag) |
+| 2025 | 24 | 6 | 30 / 30 | 538,027 | 17,934 | — |
+| **Total** | **109** | **23** | **132 / 132** | **2,482,479** | **18,807** | — |
+| **2026** | — | — | **held out entirely** | — | — | Used as a live chronological backtest, not for training |
 
 Six 2023 sessions are deliberately excluded rather than backfilled: Round 2 (Saudi Arabian GP) failed upstream at collection time and was diagnosed as not worth chasing further; Rounds 3, 4 (R+S), 5, and 6 loaded cleanly in diagnostics but were never actually saved — rather than backfill them later, the decision was to scale on exactly what's already collected and validated.
 
 <details>
-<summary><strong>Get exact row-level stats for your local dataset</strong></summary>
+<summary><strong id="get-exact-row-level-stats-for-your-local-dataset">Get exact row-level stats for your local dataset</strong></summary>
 
-Total grid rows, unique drivers, and on-disk size all depend on session length — and session length varies a lot in this dataset (red flags and safety cars can stretch a 90-minute race well past its nominal length, or a red-flagged session can end early) — so they're deliberately not hardcoded above. Run this once against your local `data/stitched/` to get real numbers for your copy of the dataset:
+The totals above were computed on 2026-09-10 directly from the 132 files in `data/stitched/` (2,482,479 rows, 35 unique drivers across 5 seasons, 34.1 MB on disk). Session length varies a lot in this dataset — red flags and safety cars can stretch a 90-minute race well past its nominal length, or a red-flagged session can end early — which is exactly why the smallest race (2021 Belgian GP, 2,580 rows) and largest (2022 Japanese GP, 39,560 rows) differ by 15x. Re-run this after adding more races or rebuilding the pipeline to refresh the numbers:
 
 ```python
 import pandas as pd
