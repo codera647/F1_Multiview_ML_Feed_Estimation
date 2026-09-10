@@ -1,0 +1,95 @@
+
+======================================================================
+2023 Round 2 (Saudi Arabian Grand Prix), R
+======================================================================
+[1/5] get_session OK -> Saudi Arabian Grand Prix  (1.15s)
+[2/5] session.load OK  (4.06s)
+
+FAILED after 5.2s: DataNotLoadedError: The data you are trying to access has not been loaded yet. See `Session.load`
+
+10 warnings before the failure:
+  fastf1.fastf1.req WARNING DEFAULT CACHE ENABLED! (24.0 KB) C:\Users\MEGA IT SOLUTION\AppData\Local\Temp\fastf1
+  fastf1.fastf1.core WARNING Failed to load session info data!
+  fastf1.fastf1.core WARNING Failed to load extended driver information!
+  fastf1.fastf1.core WARNING Failed to load session status data!
+  fastf1.fastf1.core WARNING Failed to load total lap count!
+  fastf1.fastf1.core WARNING Failed to load track status data!
+  fastf1.fastf1.core WARNING Failed to load timing data!
+  fastf1.fastf1.core WARNING Failed to add first lap time from Ergast for drivers: ['14', '11', '63', '18', '55', '31', '44', '10', '16', '24', '20', '27', '1', '22', '77', '23', '4', '21', '81', '2']
+  fastf1.fastf1.core WARNING Failed to load telemetry data!
+  fastf1.fastf1.core WARNING Failed to load race control messages!
+
+--- FULL TRACEBACK ---
+Traceback (most recent call last):
+  File "C:\Users\MEGA IT SOLUTION\AppData\Local\Temp\ipykernel_4832\2784604253.py", line 72, in <module>
+    laps_data = pd.DataFrame(session.laps)
+                             ^^^^^^^^^^^^
+  File "d:\Personal\Projects\F1 Multiview with Ml feed Recomender\.venv\Lib\site-packages\fastf1\core.py", line 1272, in laps
+    return self._get_property_warn_not_loaded('_laps')
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "d:\Personal\Projects\F1 Multiview with Ml feed Recomender\.venv\Lib\site-packages\fastf1\core.py", line 1231, in _get_property_warn_not_loaded
+    raise exceptions.DataNotLoadedError(
+    ...<2 lines>...
+    )
+fastf1.exceptions.DataNotLoadedError: The data you are trying to access has not been loaded yet. See `Session.load`
+
+
+======================================================================
+2023 Round 3 (Australian Grand Prix), R
+======================================================================
+[1/5] get_session OK -> Australian Grand Prix  (0.04s)
+[2/5] session.load OK  (65.19s)
+[3/5] session.laps -> 1003 rows, 31 cols  (0.00s)
+[4/5] api.timing_data OK -> laps_raw 995 rows, stream 21024 rows  (0.02s)
+[5/5] car_data: 20 drivers, pos_data: 20 drivers  (0.00s)
+
+SUCCESS, total 65.2s
+
+5 warnings during load:
+  fastf1.fastf1.core WARNING Failed to load session info data!
+  fastf1.fastf1.core WARNING Failed to load extended driver information!
+  fastf1.api WARNING Driver 241: Position data is incomplete!
+  fastf1.api WARNING Driver 242: Position data is incomplete!
+  fastf1.api WARNING Driver 243: Position data is incomplete!
+
+======================================================================
+2023 Round 4 (Azerbaijan Grand Prix), R
+======================================================================
+[1/5] get_session OK -> Azerbaijan Grand Prix  (0.02s)
+[2/5] session.load OK  (30.98s)
+[3/5] session.laps -> 962 rows, 31 cols  (0.00s)
+[4/5] api.timing_data OK -> laps_raw 961 rows, stream 23107 rows  (0.02s)
+[5/5] car_data: 20 drivers, pos_data: 20 drivers  (0.00s)
+
+SUCCESS, total 31.0s
+
+3 warnings during load:
+  fastf1.api WARNING Driver 241: Position data is incomplete!
+  fastf1.api WARNING Driver 242: Position data is incomplete!
+  fastf1.api WARNING Driver 243: Position data is incomplete!
+
+======================================================================
+2023 Round 5 (Miami Grand Prix), R
+======================================================================
+[1/5] get_session OK -> Miami Grand Prix  (0.02s)
+[2/5] session.load OK  (31.85s)
+[3/5] session.laps -> 1138 rows, 31 cols  (0.00s)
+[4/5] api.timing_data OK -> laps_raw 1138 rows, stream 28025 rows  (0.02s)
+[5/5] car_data: 20 drivers, pos_data: 20 drivers  (0.00s)
+
+SUCCESS, total 31.9s
+
+zero warnings
+
+======================================================================
+2023 Round 6 (Monaco Grand Prix), R
+======================================================================
+[1/5] get_session OK -> Monaco Grand Prix  (0.02s)
+[2/5] session.load OK  (34.67s)
+[3/5] session.laps -> 1515 rows, 31 cols  (0.00s)
+[4/5] api.timing_data OK -> laps_raw 1514 rows, stream 30386 rows  (0.03s)
+[5/5] car_data: 20 drivers, pos_data: 20 drivers  (0.00s)
+
+SUCCESS, total 34.7s
+
+zero warnings

@@ -1,0 +1,49 @@
+# === F1 Multiview ML Feed Estimation — .gitignore ===
+
+# FastF1 local cache (raw session data FastF1 downloads/caches on disk —
+# regenerated automatically by fastf1.Cache.enable_cache(), not source data)
+fastf1_cache/
+f1cache/
+f1_cache/
+.fastf1_cache/
+
+# Notebooks (exploratory/scratch work — not part of the reviewable pipeline)
+notebooks/
+*.ipynb_checkpoints/
+
+# Validation CSVs (generated data-quality reports, reproducible from the
+# stitching scripts — not meant to be tracked as source)
+validation*.csv
+*_validation_report.csv
+*_validation.csv
+
+# --- Standard Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+.env.*
+.venv
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
